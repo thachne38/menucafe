@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
     <meta content="web_standard" name="shell-type"/>
     <title>
       Cà phê cốt dừa Cô Hạnh
@@ -20,37 +20,33 @@
   </head>
   <body class="bg-surface text-on-surface antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed">
     <header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
-      <div class="h-20 max-w-[1200px] mx-auto px-margin-sm md:px-margin flex items-center justify-between gap-space-md">
-        <div class="flex items-center gap-space-lg">
-          <a class="flex flex-col" data-path="seasonal-menu" href="#">
-            <span class="font-headline-md text-headline-md text-primary tracking-tight">
-              Cà phê cốt dừa Cô Hạnh
+      <div class="header-main max-w-[1200px] mx-auto px-margin-sm md:px-margin flex items-center justify-between gap-space-md">
+      <div class="header-brand flex min-w-0 items-center gap-space-lg">
+        <a class="flex min-w-0 flex-col" data-path="seasonal-menu" href="#">
+          <span class="header-brand-title flex items-center gap-space-sm">
+            <img class="header-logo" src="image/logo.jpg" alt="Logo Cà phê cốt dừa Cô Hạnh">
+            <span class="header-brand-name font-headline-md text-headline-md tracking-tight">
+              CÀ PHÊ CỐT DỪA CÔ HẠNH
             </span>
-            <span class="font-label-uppercase text-label-uppercase text-on-surface-variant uppercase tracking-widest">
-              Số 6 ngõ 58 Ao Sen
+            </span>
+          <span class="header-address font-label-uppercase text-label-uppercase uppercase tracking-widest">
+            Số 6 ngõ 58 Ao Sen
+          </span>
+          <span class="header-hours flex items-center justify-center gap-space-xs text-on-primary">
+          <span class="material-symbols-outlined text-[16px] text-secondary">
+            schedule
+          </span>
+          <span class="font-caption text-caption whitespace-nowrap">
+            Mở cửa 8:00 - 23:00
+          </span>
+          <span class="w-1.5 h-1.5 rounded-full bg-surface-tint ml-space-xs">
+          </span>
             </span>
           </a>
-          <div class="flex min-w-0 items-center gap-space-xs pl-space-xs sm:pl-space-md py-space-xs text-on-surface-variant">
-            <span class="material-symbols-outlined text-[16px] text-secondary">
-              schedule
-            </span>
-            <span class="font-caption text-caption whitespace-nowrap">
-              Mở cửa 8:00 - 23:00
-            </span>
-            <span class="w-1.5 h-1.5 rounded-full bg-surface-tint ml-space-xs">
-            </span>
-          </div>
-        </div>
-        <div class="flex items-center gap-space-md">
-          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-            <span class="material-symbols-outlined text-on-primary text-[18px]">
-              person
-            </span>
-          </div>
         </div>
       </div>
-      <div class="w-full bg-surface-container-low shadow-[0_1px_4px_rgba(0,0,0,0.02)]">
-        <div class="max-w-[1200px] mx-auto px-margin-sm md:px-margin py-space-xs flex items-center gap-space-xs overflow-x-auto no-scrollbar">
+      <div class="header-menu-bar w-full bg-surface-container-low shadow-[0_1px_4px_rgba(0,0,0,0.02)]">
+        <div class="header-menu-inner max-w-[1200px] mx-auto px-margin-sm md:px-margin py-space-xs flex items-center gap-space-xs overflow-x-auto no-scrollbar">
           <span class="font-label-uppercase text-label-uppercase text-on-surface-variant uppercase mr-space-xs whitespace-nowrap">
             Thực đơn:
           </span>
@@ -79,8 +75,8 @@
       </div>
     </header>
     <main class="w-full pt-20 bg-surface min-h-[calc(100vh-20rem)]">
-      <div class="pt-10">
-        <div class="flex flex-col w-full">
+      <div class="content-stage pt-10">
+        <div class="content-shell flex flex-col w-full">
           <!-- Top Highlight Carousel Section -->
           <section class="best-seller-carousel w-full max-w-[1200px] mx-auto px-margin-sm md:px-margin mb-space-2xl">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-space-md gap-space-xs">
@@ -271,7 +267,7 @@
             </div>
           </section>
           <!-- Main Menu Sections Container -->
-          <main class="max-w-[1200px] mx-auto px-margin-sm md:px-margin w-full flex flex-col gap-space-2xl">
+          <div class="menu-content max-w-[1200px] mx-auto px-margin-sm md:px-margin w-full flex flex-col gap-space-2xl">
             <!-- CATEGORY 1: CÀ PHÊ -->
                         <section class="w-full" id="starters">
               <div class="flex flex-col justify-between mb-space-lg gap-space-xs">
@@ -375,6 +371,8 @@
                   <article class="flex flex-col group"><div class="flex items-baseline w-full"><h4 class="font-item-title text-item-title text-on-surface font-semibold flex items-center gap-space-xs whitespace-nowrap">Sinh tố mãng cầu <span class="material-symbols-outlined text-secondary text-[18px]" aria-label="Best seller">local_fire_department</span></h4><div class="flex-grow mx-space-sm border-b-[2px] border-dotted border-outline-variant/60 h-2"></div><span class="font-price-callout text-price-callout text-secondary whitespace-nowrap inline-flex justify-end gap-5"><span class="w-7 text-right">&nbsp;</span><span class="w-7 text-right">40k</span></span></div></article>
                   <article class="flex flex-col group mt-space-lg"><div class="flex items-baseline w-full"><h4 class="font-item-title text-item-title text-on-surface font-semibold whitespace-nowrap">Sinh tố bơ</h4><div class="flex-grow mx-space-sm border-b-[2px] border-dotted border-outline-variant/60 h-2"></div><span class="font-price-callout text-price-callout text-secondary whitespace-nowrap inline-flex justify-end gap-5"><span class="w-7 text-right">&nbsp;</span><span class="w-7 text-right">40k</span></span></div></article>
                   <article class="flex flex-col group mt-space-lg"><div class="flex items-baseline w-full"><h4 class="font-item-title text-item-title text-on-surface font-semibold whitespace-nowrap">Choco đá xay</h4><div class="flex-grow mx-space-sm border-b-[2px] border-dotted border-outline-variant/60 h-2"></div><span class="font-price-callout text-price-callout text-secondary whitespace-nowrap inline-flex justify-end gap-5"><span class="w-7 text-right">35k</span><span class="w-7 text-right">40k</span></span></div></article>
+                  <article class="flex flex-col group mt-space-lg"><div class="flex items-baseline w-full"><h4 class="font-item-title text-item-title text-on-surface font-semibold whitespace-nowrap">Choco Mint</h4><div class="flex-grow mx-space-sm border-b-[2px] border-dotted border-outline-variant/60 h-2"></div><span class="font-price-callout text-price-callout text-secondary whitespace-nowrap inline-flex justify-end gap-5"><span class="w-7 text-right">35k</span><span class="w-7 text-right">40k</span></span></div></article>
+                  <article class="flex flex-col group mt-space-lg"><div class="flex items-baseline w-full"><h4 class="font-item-title text-item-title text-on-surface font-semibold whitespace-nowrap">Chanh tuyết</h4><div class="flex-grow mx-space-sm border-b-[2px] border-dotted border-outline-variant/60 h-2"></div><span class="font-price-callout text-price-callout text-secondary whitespace-nowrap inline-flex justify-end gap-5"><span class="w-7 text-right">&nbsp;</span><span class="w-7 text-right">30k</span></span></div></article>
                   <article class="flex flex-col group mt-space-lg"><div class="flex items-baseline w-full"><h4 class="font-item-title text-item-title text-on-surface font-semibold flex items-center gap-space-xs whitespace-nowrap">Sữa chua đánh đá <span class="material-symbols-outlined text-secondary text-[18px]" aria-label="Best seller">local_fire_department</span></h4><div class="flex-grow mx-space-sm border-b-[2px] border-dotted border-outline-variant/60 h-2"></div><span class="font-price-callout text-price-callout text-secondary whitespace-nowrap inline-flex justify-end gap-5"><span class="w-7 text-right">30k</span><span class="w-7 text-right">35k</span></span></div></article>
                 </div>
                 <div class="coffee-column">
@@ -468,6 +466,7 @@
           <!-- Vanilla JS Carousel Autoplay & Touch Logic -->
         </div>
       </div>
+          </div>
     </main>
     <aside aria-label="Quick Guest Inquiries" class="fixed bottom-space-lg right-space-lg z-50 flex flex-col items-end gap-space-sm">
       <a class="group flex items-center gap-space-sm pl-space-md pr-space-xs py-space-xs bg-surface-container-lowest text-on-surface rounded-full shadow-[0_8px_24px_-4px_rgba(35,31,32,0.12)] hover:bg-surface-container-high transition-all transform hover:-translate-y-0.5" href="https://www.facebook.com/share/18QKUwhy6A/" rel="noopener noreferrer" target="_blank" title="Nhắn tin qua Messenger">
@@ -480,7 +479,7 @@
           </span>
         </div>
       </a>
-      <a class="group flex items-center gap-space-sm pl-space-md pr-space-xs py-space-xs bg-surface-container-lowest text-on-surface rounded-full shadow-[0_8px_24px_-4px_rgba(35,31,32,0.12)] hover:bg-surface-container-high transition-all transform hover:-translate-y-0.5" href="https://zalo.me/0914106044" rel="noopener noreferrer" target="_blank" title="Chat Zalo với quán">
+      <a class="group flex items-center gap-space-sm pl-space-md pr-space-xs py-space-xs bg-surface-container-lowest text-on-surface rounded-full shadow-[0_8px_24px_-4px_rgba(35,31,32,0.12)] hover:bg-surface-container-high transition-all transform hover:-translate-y-0.5" href="https://zalo.me/0931211282" rel="noopener noreferrer" target="_blank" title="Chat Zalo với quán">
         <span class="font-label-uppercase text-label-uppercase tracking-wider hidden sm:inline-block pr-space-xs">
           Zalo
         </span>
@@ -490,7 +489,7 @@
           </span>
         </div>
       </a>
-      <a class="group flex items-center gap-space-sm pl-space-md pr-space-xs py-space-xs bg-surface-container-lowest text-on-surface rounded-full shadow-[0_8px_24px_-4px_rgba(35,31,32,0.12)] hover:bg-surface-container-high transition-all transform hover:-translate-y-0.5" href="tel:0914106044" title="Gọi cho quán">
+      <a class="group flex items-center gap-space-sm pl-space-md pr-space-xs py-space-xs bg-surface-container-lowest text-on-surface rounded-full shadow-[0_8px_24px_-4px_rgba(35,31,32,0.12)] hover:bg-surface-container-high transition-all transform hover:-translate-y-0.5" href="tel:0931211282" title="Gọi cho quán">
         <span class="font-label-uppercase text-label-uppercase tracking-wider hidden sm:inline-block pr-space-xs">
           Gọi điện
         </span>
@@ -548,11 +547,11 @@
               Liên Hệ
             </span>
             <div class="font-body-sm text-body-sm text-on-surface flex flex-col gap-space-xs">
-              <a class="flex items-center gap-space-xs hover:text-secondary transition-colors" href="tel:0914106044">
+              <a class="flex items-center gap-space-xs hover:text-secondary transition-colors" href="tel:0931211282">
                 <span class="material-symbols-outlined text-[16px] text-secondary">
                   call
                 </span>
-                0914 106 044
+                0931 211 282
               </a>
               <span class="flex items-center gap-space-xs text-on-surface-variant">
                 <span class="material-symbols-outlined text-[16px] text-surface-tint">

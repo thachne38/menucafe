@@ -7,19 +7,19 @@
   if (!track || !dotBtns.length) return;
 
   const slideDetails = [
-    ['Cà phê cốt dừa', 'Cà phê đậm đà hòa quyện cùng cốt dừa béo thơm, món đặc trưng của quán.', 'Món bán chạy'],
-    ['Kem bơ dừa', 'Bơ chín mịn kết hợp kem dừa tươi, ngọt béo và mát lạnh.', 'Được yêu thích'],
-    ['Dừa dầm Hải Phòng', 'Dừa non, sữa chua và nước cốt dừa hòa quyện trong món ăn vặt thanh mát.', 'Best Seller'],
-    ['Sinh tố mãng cầu', 'Mãng cầu xay tươi mỗi ngày, vị chua ngọt tự nhiên và thơm dịu.', 'Món nổi bật'],
-    ['Sữa chua đánh đá', 'Sữa chua nhà làm đánh cùng đá mát lạnh, nhẹ vị và dễ uống.', 'Khách gọi nhiều']
+    ['Cà phê cốt dừa', '30k', 'Best Seller', 'Thanh nhẹ'],
+    ['Bơ già dừa non', '40k', 'Món mới', 'Thanh ngọt'],
+    ['Kem bơ dừa', '40k', 'Mát mẻ', 'Thanh mát'],
+    ['Dừa dầm truyền thống', '30k', 'Best Seller', 'Đậm vị'],
+    ['Combo buổi sáng', '55k', 'Thơm ngon bổ dưỡng', '']
   ];
   const slides = Array.from(track.children);
-  const imageUrl = "url('image/menu.jpg')";
+  const imageUrls = ["url('/image/pager1.jpg')", "url('/image/pager2.jpg')", "url('/image/pager3.jpg')", "url('/image/pager4.jpg')", "url('/image/pager5.jpg')"];
 
   slides.forEach((slide, index) => {
     const image = slide.querySelector('[data-alt]');
     if (image) {
-      image.style.backgroundImage = imageUrl;
+      image.style.backgroundImage = imageUrls[index];
       image.dataset.alt = `${slideDetails[index][0]} - ${slideDetails[index][1]}`;
     }
   });
@@ -28,7 +28,7 @@
   track.appendChild(fifthSlide);
   const fifthImage = fifthSlide.querySelector('[data-alt]');
   if (fifthImage) {
-    fifthImage.style.backgroundImage = imageUrl;
+    fifthImage.style.backgroundImage = imageUrls[4];
     fifthImage.dataset.alt = `${slideDetails[4][0]} - ${slideDetails[4][1]}`;
   }
 
@@ -37,10 +37,19 @@
     const title = slide.querySelector('h3');
     const description = slide.querySelector('p');
     const badge = slide.querySelector('.bg-secondary, .bg-surface-tint, .bg-tertiary-container');
+    const price = slide.querySelector('.text-secondary-container');
+    const oldPrice = slide.querySelector('.line-through');
+    const note = slide.querySelector('[class~="bg-primary/60"]');
     const badgeText = badge ? badge : null;
     if (title) title.textContent = detail[0];
-    if (description) description.textContent = detail[1];
+    if (description) description.textContent = detail[3];
     if (badgeText) badgeText.textContent = detail[2];
+    if (price) price.textContent = detail[1];
+    if (oldPrice) oldPrice.remove();
+    if (note) {
+      note.textContent = detail[3];
+      note.hidden = !detail[3];
+    }
   });
 
   let currentIndex = 0;
@@ -79,15 +88,46 @@
   });
 
   let touchStartX = 0;
+  let touchStartY = 0;
+  let isHorizontal = null;
+
+  // Cho phép scroll dọc, giữ ngang cho carousel
+  track.style.touchAction = 'pan-y';
+
   track.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
   track.addEventListener('mouseleave', startAutoplay);
-  track.addEventListener('touchstart', (event) => {
-    touchStartX = event.changedTouches[0].screenX;
+
+  track.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].clientX;
+    touchStartY = e.changedTouches[0].clientY;
+    isHorizontal = null;
     clearInterval(autoplayTimer);
+    track.style.transition = 'none';
   }, { passive: true });
-  track.addEventListener('touchend', (event) => {
-    const distance = touchStartX - event.changedTouches[0].screenX;
-    if (Math.abs(distance) > 45) updateCarousel(currentIndex + (distance > 0 ? 1 : -1));
+
+  track.addEventListener('touchmove', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+
+    if (isHorizontal === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+      isHorizontal = Math.abs(dx) > Math.abs(dy);
+    }
+
+    if (isHorizontal) {
+      track.style.transform = `translateX(calc(${-currentIndex * 100}% + ${dx}px))`;
+    }
+  }, { passive: true });
+
+  track.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    track.style.transition = '';
+
+    if (isHorizontal && Math.abs(dx) > 45) {
+      updateCarousel(currentIndex + (dx < 0 ? 1 : -1));
+    } else {
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+    isHorizontal = null;
     startAutoplay();
   }, { passive: true });
 
