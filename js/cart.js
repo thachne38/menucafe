@@ -95,12 +95,24 @@
         <div class="cart-drawer-footer"><div><span>Tạm tính</span><strong data-cart-total>0đ</strong></div><p class="cart-shipping-note">+ phí ship</p><p class="cart-order-hint">Khi ấn đặt đơn hàng, đơn hàng sẽ được sao chép, vui lòng dán vào zalo để lên đơn</p><button type="button" class="cart-add-button" data-order>Đặt món</button><p data-order-status></p></div>
       </aside>`;
     document.body.appendChild(drawer);
-    return { modal, drawer };
+    const guide = document.createElement('div');
+    guide.className = 'cart-guide-backdrop is-open';
+    guide.innerHTML = `
+      <div class="cart-guide-modal" role="dialog" aria-modal="true" aria-labelledby="cart-guide-title">
+        <button class="cart-close" type="button" data-close-guide aria-label="Đóng">×</button>
+        <span class="material-symbols-outlined cart-guide-icon">shopping_basket</span>
+        <h2 id="cart-guide-title">Hướng dẫn đặt món</h2>
+        <p>Vui lòng ấn chọn vào món trên menu để thêm món vào giỏ hàng</p>
+        <button type="button" class="cart-add-button" data-close-guide>Đã hiểu</button>
+      </div>`;
+    document.body.appendChild(guide);
+    return { modal, drawer, guide };
   }
 
   const shell = createShell();
   const modal = shell.modal;
   const drawer = shell.drawer;
+  const guide = shell.guide;
 
   function updateCartBadge() {
     const count = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -121,7 +133,10 @@
     modal.querySelector('[data-quantity]').textContent = '1';
     modal.querySelector('[data-size-options]').innerHTML = selectedItem.prices.map((price, index) =>
       `<label><input type="radio" name="cart-size" value="${index}" ${index === 0 ? 'checked' : ''}><span>${price.label || 'M'} · ${money(price.value)}</span></label>`).join('');
-    modal.querySelector('[data-topping-options]').innerHTML = toppings.map(([name, price]) =>
+    const itemToppings = selectedItem.title === 'Cà phê cốt dừa'
+      ? [...toppings, ['Cốt thêm', 10000]]
+      : toppings;
+    modal.querySelector('[data-topping-options]').innerHTML = itemToppings.map(([name, price]) =>
       `<label><input type="checkbox" value="${name}" data-topping-price="${price}"><span>${name}</span><em>+${money(price)}</em></label>`).join('');
     modal.querySelectorAll('[data-preference-options] input').forEach((input) => { input.checked = false; });
     const choiceGroup = modal.querySelector('[data-choice-group]');
@@ -153,6 +168,8 @@
   function renderCart() {
     const items = drawer.querySelector('[data-cart-items]');
     const total = cart.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
+    const orderButton = drawer.querySelector('[data-order]');
+    orderButton.classList.toggle('is-empty', cart.length === 0);
     drawer.querySelector('[data-cart-total]').textContent = money(total);
     items.innerHTML = cart.length ? cart.map((item, index) => `
       <div class="cart-line">
@@ -240,6 +257,9 @@
     if (event.target.closest('[data-open-cart]')) openDrawer();
     if (event.target.closest('[data-close-cart]') || event.target === modal) closeProduct();
     if (event.target.closest('[data-close-drawer]') || event.target === drawer) closeDrawer();
+    if (event.target.closest('[data-close-guide]') || event.target === guide) {
+      guide.classList.remove('is-open');
+    }
     if (event.target.closest('[data-quantity-minus]')) {
       const quantity = modal.querySelector('[data-quantity]');
       quantity.textContent = Math.max(1, Number(quantity.textContent) - 1);
