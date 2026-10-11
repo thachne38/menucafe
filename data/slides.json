@@ -3,7 +3,7 @@
     "image": "pager1.jpg",
     "title": "Cà phê cốt dừa",
     "description": "Cà phê đậm đà hòa quyện cùng cốt dừa béo thơm, món đặc trưng của quán.",
-    "price": "30k",
+    "price": "30.000đ",
     "badge": "Cà phê cốt dừa",
     "tag": "Thanh nhẹ",
     "note": "Bán chạy nhất"
@@ -12,7 +12,7 @@
     "image": "pager2.jpg",
     "title": "Bơ già dừa non",
     "description": "Bơ chín mịn kết hợp dừa non tươi mát, ngọt béo tự nhiên.",
-    "price": "40k",
+    "price": "40.000đ",
     "badge": "Món mới",
     "tag": "Thanh ngọt",
     "note": "Được yêu thích"
@@ -21,7 +21,7 @@
     "image": "pager3.jpg",
     "title": "Kem bơ dừa",
     "description": "Kem dừa tươi kết hợp bơ chín mịn, mát lạnh và béo ngậy.",
-    "price": "40k",
+    "price": "40.000đ",
     "badge": "Best Seller",
     "tag": "Mát mẻ",
     "note": "Bán chạy"
@@ -30,7 +30,7 @@
     "image": "pager4.jpg",
     "title": "Dừa dầm truyền thống",
     "description": "Dừa non, sữa chua và nước cốt dừa hòa quyện trong món ăn vặt thanh mát.",
-    "price": "30k",
+    "price": "30.000đ",
     "badge": "Best Seller",
     "tag": "Đậm vị",
     "note": "Đặt nhiều nhất"
@@ -39,7 +39,7 @@
     "image": "pager5.jpg",
     "title": "Combo buổi sáng",
     "description": "Cà phê cốt dừa + bánh mì que, khởi đầu ngày mới thơm ngon bổ dưỡng.",
-    "price": "55k",
+    "price": "55.000đ",
     "badge": "Tiết kiệm",
     "tag": "Gợi ý của quán",
     "note": "Hạn định"
