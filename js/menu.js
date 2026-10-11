@@ -54,13 +54,20 @@
     if (!item) return;
     const title    = slide.querySelector('h3');
     const desc     = slide.querySelector('p');
-    const badge    = slide.querySelector('.bg-secondary, .bg-surface-tint, .bg-tertiary-container');
     const price    = slide.querySelector('.text-secondary-container');
     const oldPrice = slide.querySelector('.line-through');
     const note     = slide.querySelector('[class~="bg-primary/60"]');
+
+    // Lấy 2 tag từ hàng badge (span đầu = badge chính, span thứ 2 = tag phụ)
+    const badgeRow  = slide.querySelector('.flex.items-center.gap-space-xs');
+    const badgeSpans = badgeRow ? badgeRow.querySelectorAll('span') : [];
+    const badge = badgeSpans[0];
+    const tag   = badgeSpans[1];
+
     if (title)    title.textContent    = item.title;
     if (desc)     desc.textContent     = item.description;
     if (badge)    badge.textContent    = item.badge;
+    if (tag)      tag.textContent      = item.tag;
     if (price)    price.textContent    = item.price;
     if (oldPrice) oldPrice.remove();
     if (note)   { note.textContent = item.note; note.hidden = !item.note; }
