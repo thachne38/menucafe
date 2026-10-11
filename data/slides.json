@@ -1,0 +1,42 @@
+[
+  {
+    "image": "pager1.jpg",
+    "title": "Cà phê cốt dừa",
+    "description": "Cà phê đậm đà hòa quyện cùng cốt dừa béo thơm, món đặc trưng của quán.",
+    "price": "30k",
+    "badge": "Best Seller",
+    "note": "Thanh nhẹ"
+  },
+  {
+    "image": "pager2.jpg",
+    "title": "Bơ già dừa non",
+    "description": "Bơ chín mịn kết hợp dừa non tươi mát, ngọt béo tự nhiên.",
+    "price": "40k",
+    "badge": "Món mới",
+    "note": "Thanh ngọt"
+  },
+  {
+    "image": "pager3.jpg",
+    "title": "Kem bơ dừa",
+    "description": "Bơ chín mịn kết hợp kem dừa tươi, ngọt béo và mát lạnh.",
+    "price": "40k",
+    "badge": "Mát mẻ",
+    "note": "Thanh mát"
+  },
+  {
+    "image": "pager4.jpg",
+    "title": "Dừa dầm truyền thống",
+    "description": "Dừa non, sữa chua và nước cốt dừa hòa quyện trong món ăn vặt thanh mát.",
+    "price": "30k",
+    "badge": "Best Seller",
+    "note": "Đậm vị"
+  },
+  {
+    "image": "pager5.jpg",
+    "title": "Combo buổi sáng",
+    "description": "Cà phê cốt dừa + bánh mì que, khởi đầu ngày mới thơm ngon bổ dưỡng.",
+    "price": "55k",
+    "badge": "Tiết kiệm",
+    "note": "Thơm ngon"
+  }
+]

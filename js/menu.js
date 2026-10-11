@@ -1,4 +1,4 @@
-(function () {
+(async function () {
   const track = document.getElementById('carousel-track');
   const prevBtn = document.getElementById('carousel-prev');
   const nextBtn = document.getElementById('carousel-next');
@@ -6,50 +6,64 @@
 
   if (!track || !dotBtns.length) return;
 
-  const slideDetails = [
-    ['Cà phê cốt dừa', '30k', 'Best Seller', 'Thanh nhẹ'],
-    ['Bơ già dừa non', '40k', 'Món mới', 'Thanh ngọt'],
-    ['Kem bơ dừa', '40k', 'Mát mẻ', 'Thanh mát'],
-    ['Dừa dầm truyền thống', '30k', 'Best Seller', 'Đậm vị'],
-    ['Combo buổi sáng', '55k', 'Thơm ngon bổ dưỡng', '']
-  ];
+  // ── Đọc nội dung từ data/slides.json ──────────────────────────────────────
+  // Để thay đổi ảnh/nội dung: chỉ cần sửa data/slides.json + push ảnh mới
+  // Không cần đụng vào code JS này
+  let slideDetails;
+  try {
+    const res = await fetch('data/slides.json');
+    if (!res.ok) throw new Error('fetch failed');
+    slideDetails = await res.json();
+  } catch (e) {
+    // fallback nếu không đọc được file
+    slideDetails = [
+      { image:'pager1.jpg', title:'Cà phê cốt dừa',       description:'Cà phê đậm đà hòa quyện cùng cốt dừa béo thơm.', price:'30k', badge:'Best Seller', note:'Thanh nhẹ'   },
+      { image:'pager2.jpg', title:'Bơ già dừa non',        description:'Bơ chín mịn kết hợp dừa non tươi mát.',            price:'40k', badge:'Món mới',    note:'Thanh ngọt' },
+      { image:'pager3.jpg', title:'Kem bơ dừa',            description:'Kem dừa tươi kết hợp bơ chín mịn, mát lạnh.',     price:'40k', badge:'Mát mẻ',     note:'Thanh mát'  },
+      { image:'pager4.jpg', title:'Dừa dầm truyền thống',  description:'Dừa non, sữa chua và nước cốt dừa hòa quyện.',    price:'30k', badge:'Best Seller', note:'Đậm vị'     },
+      { image:'pager5.jpg', title:'Combo buổi sáng',       description:'Cà phê cốt dừa + bánh mì que thơm ngon.',          price:'55k', badge:'Tiết kiệm',  note:'Thơm ngon'  }
+    ];
+  }
+  // ──────────────────────────────────────────────────────────────────────────
+
   const slides = Array.from(track.children);
-  const imageUrls = ["url('image/pager1.jpg')", "url('image/pager2.jpg')", "url('image/pager3.jpg')", "url('image/pager4.jpg')", "url('image/pager5.jpg')"];
 
   slides.forEach((slide, index) => {
+    const item = slideDetails[index];
+    if (!item) return;
     const image = slide.querySelector('[data-alt]');
     if (image) {
-      image.style.backgroundImage = imageUrls[index];
-      image.dataset.alt = `${slideDetails[index][0]} - ${slideDetails[index][1]}`;
+      image.style.backgroundImage = `url('image/${item.image}')`;
+      image.dataset.alt = `${item.title} - ${item.description}`;
     }
   });
 
   const fifthSlide = slides[0].cloneNode(true);
   track.appendChild(fifthSlide);
-  const fifthImage = fifthSlide.querySelector('[data-alt]');
-  if (fifthImage) {
-    fifthImage.style.backgroundImage = imageUrls[4];
-    fifthImage.dataset.alt = `${slideDetails[4][0]} - ${slideDetails[4][1]}`;
+  const fifthItem = slideDetails[4];
+  if (fifthItem) {
+    const fifthImage = fifthSlide.querySelector('[data-alt]');
+    if (fifthImage) {
+      fifthImage.style.backgroundImage = `url('image/${fifthItem.image}')`;
+      fifthImage.dataset.alt = `${fifthItem.title} - ${fifthItem.description}`;
+    }
   }
 
   Array.from(track.children).forEach((slide, index) => {
-    const detail = slideDetails[index];
-    const title = slide.querySelector('h3');
-    const description = slide.querySelector('p');
-    const badge = slide.querySelector('.bg-secondary, .bg-surface-tint, .bg-tertiary-container');
-    const price = slide.querySelector('.text-secondary-container');
+    const item = slideDetails[index];
+    if (!item) return;
+    const title    = slide.querySelector('h3');
+    const desc     = slide.querySelector('p');
+    const badge    = slide.querySelector('.bg-secondary, .bg-surface-tint, .bg-tertiary-container');
+    const price    = slide.querySelector('.text-secondary-container');
     const oldPrice = slide.querySelector('.line-through');
-    const note = slide.querySelector('[class~="bg-primary/60"]');
-    const badgeText = badge ? badge : null;
-    if (title) title.textContent = detail[0];
-    if (description) description.textContent = detail[3];
-    if (badgeText) badgeText.textContent = detail[2];
-    if (price) price.textContent = detail[1];
+    const note     = slide.querySelector('[class~="bg-primary/60"]');
+    if (title)    title.textContent    = item.title;
+    if (desc)     desc.textContent     = item.description;
+    if (badge)    badge.textContent    = item.badge;
+    if (price)    price.textContent    = item.price;
     if (oldPrice) oldPrice.remove();
-    if (note) {
-      note.textContent = detail[3];
-      note.hidden = !detail[3];
-    }
+    if (note)   { note.textContent = item.note; note.hidden = !item.note; }
   });
 
   let currentIndex = 0;
@@ -72,26 +86,16 @@
     autoplayTimer = setInterval(() => updateCarousel(currentIndex + 1), 4500);
   }
 
-  prevBtn?.addEventListener('click', () => {
-    updateCarousel(currentIndex - 1);
-    startAutoplay();
-  });
-  nextBtn?.addEventListener('click', () => {
-    updateCarousel(currentIndex + 1);
-    startAutoplay();
-  });
+  prevBtn?.addEventListener('click', () => { updateCarousel(currentIndex - 1); startAutoplay(); });
+  nextBtn?.addEventListener('click', () => { updateCarousel(currentIndex + 1); startAutoplay(); });
   dotBtns.forEach((dot) => {
-    dot.addEventListener('click', () => {
-      updateCarousel(Number(dot.dataset.index));
-      startAutoplay();
-    });
+    dot.addEventListener('click', () => { updateCarousel(Number(dot.dataset.index)); startAutoplay(); });
   });
 
   let touchStartX = 0;
   let touchStartY = 0;
   let isHorizontal = null;
 
-  // Cho phép scroll dọc, giữ ngang cho carousel
   track.style.touchAction = 'pan-y';
 
   track.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
@@ -108,11 +112,9 @@
   track.addEventListener('touchmove', (e) => {
     const dx = e.changedTouches[0].clientX - touchStartX;
     const dy = e.changedTouches[0].clientY - touchStartY;
-
     if (isHorizontal === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
       isHorizontal = Math.abs(dx) > Math.abs(dy);
     }
-
     if (isHorizontal) {
       track.style.transform = `translateX(calc(${-currentIndex * 100}% + ${dx}px))`;
     }
@@ -121,7 +123,6 @@
   track.addEventListener('touchend', (e) => {
     const dx = e.changedTouches[0].clientX - touchStartX;
     track.style.transition = '';
-
     if (isHorizontal && Math.abs(dx) > 45) {
       updateCarousel(currentIndex + (dx < 0 ? 1 : -1));
     } else {
