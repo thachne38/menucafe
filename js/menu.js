@@ -58,8 +58,8 @@
     const oldPrice = slide.querySelector('.line-through');
     const note     = slide.querySelector('[class~="bg-primary/60"]');
 
-    // Lấy 2 tag từ hàng badge (span đầu = badge chính, span thứ 2 = tag phụ)
-    const badgeRow  = slide.querySelector('.flex.items-center.gap-space-xs');
+    // Lấy 2 tag từ hàng badge (div ngay trước h3)
+    const badgeRow   = title?.previousElementSibling;
     const badgeSpans = badgeRow ? badgeRow.querySelectorAll('span') : [];
     const badge = badgeSpans[0];
     const tag   = badgeSpans[1];
