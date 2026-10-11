@@ -14,7 +14,7 @@
     ['Combo buổi sáng', '55k', 'Thơm ngon bổ dưỡng', '']
   ];
   const slides = Array.from(track.children);
-  const imageUrls = ["url('/image/pager1.jpg')", "url('/image/pager2.jpg')", "url('/image/pager3.jpg')", "url('/image/pager4.jpg')", "url('/image/pager5.jpg')"];
+  const imageUrls = ["url('image/pager1.jpg')", "url('image/pager2.jpg')", "url('image/pager3.jpg')", "url('image/pager4.jpg')", "url('image/pager5.jpg')"];
 
   slides.forEach((slide, index) => {
     const image = slide.querySelector('[data-alt]');
